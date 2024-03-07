@@ -1,0 +1,52 @@
+LOAD CSV WITH HEADERS FROM 'file:///uni.csv' AS line
+CREATE (:uni {uni: line.uni, name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///tele.csv' AS line
+CREATE (:tele {tele: line.tele, name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///poly.csv' AS line
+CREATE (:poly {poly: line.poly,name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///misc.csv' AS line
+CREATE (:misc {misc: line.misc, name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///go.csv' AS line
+CREATE (:go {go: line.go, name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///legal.csv' AS line 
+CREATE (:legal{legal: line.legal, name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///sti.csv' AS line 
+CREATE (:sti {sti: line.sti, name: line.name, Institution_Type: line.type, STI_Composite: line.symbol, Legal_Instituion: line.monitored, url: line.url})
+
+LOAD CSV WITH HEADERS FROM 'file:///name.csv' AS line
+CREATE (:name {name: line.name})
+
+
+LOAD CSV WITH HEADERS FROM 'file:///uni_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:uni {uni:line.uni})
+MERGE (from)-[r:Serve]->(to)
+
+LOAD CSV WITH HEADERS FROM 'file:///tele_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:tele { tele:line.tele})
+MERGE (from)-[r:Serve]->(to)
+
+LOAD CSV WITH HEADERS FROM 'file:///poly_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:poly { poly:line.poly})
+MERGE (from)-[r:Serve]->(to)
+
+LOAD CSV WITH HEADERS FROM 'file:///misc_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:misc { misc:line.misc})
+MERGE (from)-[r:Serve]->(to)
+
+LOAD CSV WITH HEADERS FROM 'file:///go_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:go { go:line.go})
+MERGE (from)-[r:Serve]->(to)
+
+LOAD CSV WITH HEADERS FROM 'file:///legal_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:legal { legal:line.legal})
+MERGE (from)-[r:Serve]->(to)
+
+LOAD CSV WITH HEADERS FROM 'file:///sti_name.csv' AS line 
+MATCH (from :name{ name: line.name}), (to:sti { sti:line.sti})
+MERGE (from)-[r:Serve]->(to)
